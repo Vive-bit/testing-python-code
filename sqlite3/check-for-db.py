@@ -5,18 +5,18 @@ import os
 
 DATABASE_PATH = "data/files/localdata.db"
 
-if not os.path.isfile('data/files/localdata.db'):
+if not os.path.isfile('data/files/localdata.db'): # only a notifycation
   print(f"[ERROR] [sqlite3 database] database file ({DATABASE_PATH}) not found!")
   print(f"[sqlite3 database] Creating database file in {DATABASE_PATH}")
   pass
 
-DATABASE_LOCALDATE = sl.connect('{}'.format(DATABASE_PATH))
-DATABASE_LOCALDATE_CURSOR = DATABASE_LOCALDATE.cursor()
+DATABASE_LOCALDATE = sl.connect('{}'.format(DATABASE_PATH)) # auto-creating db if not existing
+DATABASE_LOCALDATE_CURSOR = DATABASE_LOCALDATE.cursor() # cursor of the db
 
 
 
 
-def check_db_(name):
+def check_db_(name): # return False/True if DB TABLE existing
   listOfTables = DATABASE_LOCALDATE_CURSOR.execute(
   """SELECT name FROM sqlite_master WHERE type='table'
   AND name='{}'; """.format(name)).fetchall()
@@ -25,7 +25,7 @@ def check_db_(name):
   else:
     return True
 
-def create_db_table_(name):
+def create_db_table_(name): # create DB TABLE if not existing. (return True/False)
   resl = check_db_(name)
   if resl == False:
     DATABASE_LOCALDATE_CURSOR.execute("""CREATE TABLE {} (id integer, type text)""".format(name))
@@ -34,7 +34,7 @@ def create_db_table_(name):
   else:
     return False
 
-def db_add_(dbname, userid, typ):
+def db_add_(dbname, userid, typ): # add DB VALUE to DB TABLE (return True/False)
   g = check_db_(dbname)
   if g == False:
     return False
@@ -44,7 +44,7 @@ def db_add_(dbname, userid, typ):
   DATABASE_LOCALDATE.commit()
   return True
 
-def db_remove_(dbname,userid,typ):
+def db_remove_(dbname,userid,typ): # remove DB VALUE to DB TABLE (return True/False)
   g = check_db_(dbname)
   if g == False:
     return False
@@ -54,13 +54,16 @@ def db_remove_(dbname,userid,typ):
   DATABASE_LOCALDATE.commit()
   return True
 
-def db_listkey_(dbname,typ):
+def db_listkey_(dbname,typ): # return DB VALUES of DB TABLE (return False/table)
   g = check_db_(dbname)
   if g == False:
     return False
   typ = str(typ)
   dblist = DATABASE_LOCALDATE_CURSOR.execute("SELECT * FROM {} WHERE type='{}'; ".format(dbname,typ)).fetchall()
   return dblist
+###########################################
+# examples
+
 
 d = 123 # ID
 typa = "tban" # TYPE
