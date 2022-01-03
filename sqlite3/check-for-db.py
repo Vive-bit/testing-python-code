@@ -5,7 +5,7 @@ import os
 
 DATABASE_PATH = "data/files/localdata.db"
 
-if not os.path.isfile('data/files/localdata.db'):
+if not os.path.isfile('data/files/localdata.db'): # just a notifycation
   print(f"[ERROR] [sqlite3 database] database file ({DATABASE_PATH}) not found!")
   print(f"[sqlite3 database] Creating database file in {DATABASE_PATH}")
   pass
@@ -84,26 +84,21 @@ def db_listkey_(dbname,typ):
   return dblist
 
 
-
-d = 123
-typa = "tban"
-nam = "asd"
-g = create_db_table_(nam)
+###############################
+# examples for the def functions
+######################
+g = create_db_table_(TABLE-NAME)
 print(g)
-i = db_listkey_(nam,typa)
+##############
+i = db_listkey_(TABLE-NAME,VALUE-TYPE)
 print(i)
-a = db_check_value_(nam,d,typa,1)
+####################
+a = db_check_value_(TABLE-NAME,VALUE-ID,VALUE-TYPE,1)
 print(a)
-a = db_add_(nam,d,typa)
+#####################
+a = db_add_(TABLE-NAME,VALUE-ID,VALUE-ID)
 print(a)
-a = db_add_(nam,d,typa)
+###################
+a = db_remove_(TABLE-NAME,VALUE-ID,VALUE-TYPE)
 print(a)
-a = db_check_value_(nam,d,typa,1)
-print(a)
-a = db_remove_(nam,d,typa)
-print(a)
-a = db_check_value_(nam,d,typa,1)
-print(a)
-i = db_listkey_(nam,typa)
-print(i)
-
+####################
