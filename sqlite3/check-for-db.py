@@ -75,6 +75,9 @@ def db_check_value_(dbname,userid,typ,resp):
     else:
       return True
 
+def db_save_():
+  DATABASE_LOCALDATE.commit()
+    
 def db_listkey_(dbname,typ):
   g = check_db_table_(dbname)
   if g == False:
@@ -102,3 +105,5 @@ print(a)
 a = db_remove_(TABLE-NAME,VALUE-ID,VALUE-TYPE)
 print(a)
 ####################
+db_save_()
+#####################
